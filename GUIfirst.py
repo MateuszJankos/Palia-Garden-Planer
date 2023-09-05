@@ -7,6 +7,9 @@ def on_button_click(row, col):
 
 root = tk.Tk()
 
+# Zmiana koloru tła
+root.configure(bg='#303533')
+
 # Wymiary okna
 root.geometry("600x800")
 
