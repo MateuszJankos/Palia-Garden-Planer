@@ -38,5 +38,14 @@ for i in range(9):
 label = tk.Label(root, text="Set up your garden here")
 label.pack(pady=10)  # Dodajemy odstęp od etykiety do siatki guzików
 
+# Tworzymy ramkę dla 7 guzików poziomo
+button_frame = tk.Frame(root)
+button_frame.pack()
+
+# Dodajemy 7 guzików z nazwami od 1 do 7 poziomo
+for i in range(1, 8):
+    button = tk.Button(button_frame, text=str(i), width=5, height=2)
+    button.pack(side=tk.LEFT, padx=5)
+
 # Uruchomienie pętli głównej
 root.mainloop()
