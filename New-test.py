@@ -3,7 +3,14 @@ from tkinter import PhotoImage
 from PIL import Image, ImageTk
 
 def on_button_click(row, col):
-    print(f"Kliknięto przycisk w rzędzie {row}, kolumnie {col}")
+    if my_buttons[row][col]['state'] == 'normal':
+        my_buttons[row][col]['state'] = 'disabled'
+        my_buttons[row][col].config(relief=tk.SUNKEN, borderwidth=3)  # Ustaw obramówkę na klikniętym przycisku
+        print(f"Zaznaczono przycisk w rzędzie {row}, kolumnie {col}")
+    else:
+        my_buttons[row][col]['state'] = 'normal'
+        my_buttons[row][col].config(relief=tk.RAISED, borderwidth=1)  # Przywróć standardową obramówkę na odznaczonym przycisku
+        print(f"Odznaczono przycisk w rzędzie {row}, kolumnie {col}")
 
 root = tk.Tk()
 
@@ -13,7 +20,7 @@ root.configure(bg='#303533')
 # Wymiary okna
 root.geometry("600x800")
 
-#Tytuł Programu na górze
+# Tytuł Programu na górze
 root.title("Palia Garden Planer Program")
 
 # Tworzenie ramki do umieszczenia siatki guzików
@@ -25,7 +32,7 @@ image = Image.open("soil.png")
 photo = ImageTk.PhotoImage(image)
 
 # Tworzenie siatki guzików z obrazem
-buttons = [[None for _ in range(9)] for _ in range(9)]
+my_buttons = [[None for _ in range(9)] for _ in range(9)]
 
 for row in range(9):
     for col in range(9):
