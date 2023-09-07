@@ -17,18 +17,10 @@ def select_vegetable(vegetable):
     global selected_vegetable
     selected_vegetable = vegetable
 
-def reset_garden():
-    global selected_vegetable, garden_plan
-    selected_vegetable = None
-    garden_plan = [[None for _ in range(9)] for _ in range(9)]
-    for row in range(9):
-        for col in range(9):
-            buttons[row][col].configure(image=photo)
-    
 root = tk.Tk()
 root.configure(bg='#303533')
 root.geometry("600x800")
-root.title("Palia Garden Planner Program")
+root.title("Palia Garden Planer Program")
 
 frame = tk.Frame(root)
 frame.pack(padx=20, pady=20)
@@ -62,9 +54,6 @@ for i in range(1, 8):
     vegetable_images[i] = digit_photo  # Przechowujemy obrazki warzyw w słowniku
     button = tk.Button(button_frame, image=digit_photo, width=50, height=50, command=lambda i=i: select_vegetable(i))
     button.pack(side=tk.LEFT, padx=5)
-
-reset_button = tk.Button(root, text="Reset", command=reset_garden)
-reset_button.pack(pady=10)
 
 for i in range(9):
     frame.columnconfigure(i, weight=1)
