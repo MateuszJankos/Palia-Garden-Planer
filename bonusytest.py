@@ -58,7 +58,7 @@ def combine_vegetables(vegetable1, vegetable2):
         if desc == combined_description:
             return veg
     return None
-
+  # wybierz warzywo 
 def select_vegetable(vegetable):
     global selected_vegetable
     selected_vegetable = vegetable
