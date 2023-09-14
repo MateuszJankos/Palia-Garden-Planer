@@ -9,7 +9,7 @@ def on_button_click(row, col):
         if selected_vegetable in vegetable_images:
             buttons[row][col].configure(image=vegetable_images[selected_vegetable])
             garden_plan[row][col] = selected_vegetable
-            pygame.mixer.Sound("sound.mp3").play()  # Dodaj dźwięk po wybraniu warzywa
+            pygame.mixer.Sound("sound.mp3").play()  # Dodaj dźwięk po kliknięciu w pole
         else:
             print(f"Nie znaleziono obrazka dla warzywa {selected_vegetable}")
     else:
@@ -18,7 +18,6 @@ def on_button_click(row, col):
 def select_vegetable(vegetable):
     global selected_vegetable
     selected_vegetable = vegetable
-    pygame.mixer.Sound("sound.mp3").play()  # Dodaj dźwięk po wybraniu warzywa
 
 def reset_garden():
     global selected_vegetable, garden_plan
@@ -29,11 +28,10 @@ def reset_garden():
             buttons[row][col].configure(image=photo)
 
 def on_left_click(event):
-    # Sprawdź, czy kliknięcie jest poza siatką 9x9
-    if event.widget not in buttons_frame.winfo_children():
-        pygame.mixer.Sound("srclick.mp3").play()  # Dodaj dźwięk po lewym kliknięciu myszą
+    pygame.mixer.Sound("srclick.mp3").play()  # Dodaj dźwięk po lewym kliknięciu myszą
 
-pygame.mixer.init()  # Inicjowanie modułu dźwięku pygame.mixer
+# Inicjowanie modułu dźwięku pygame.mixer
+pygame.mixer.init()
 
 root = tk.Tk()
 root.geometry("720x720")
@@ -54,9 +52,6 @@ frame.pack(padx=20, pady=5)
 image = Image.open("soil.png")
 photo = ImageTk.PhotoImage(image)
 
-buttons_frame = tk.Frame(root)  # Ramka na guziki
-buttons_frame.pack()
-
 buttons = [[None for _ in range(9)] for _ in range(9)]
 vegetable_images = {}
 
@@ -65,7 +60,7 @@ garden_plan = [[None for _ in range(9)] for _ in range(9)]
 
 for row in range(9):
     for col in range(9):
-        button = tk.Button(buttons_frame, image=photo, width=50, height=50, command=lambda row=row, col=col: on_button_click(row, col))
+        button = tk.Button(frame, image=photo, width=50, height=50, command=lambda row=row, col=col: on_button_click(row, col))
         button.grid(row=row, column=col, sticky="nsew")
         buttons[row][col] = button
 
@@ -95,3 +90,4 @@ for i in range(9):
 root.bind("<Button-1>", on_left_click)  # Przypisz dźwięk do lewego kliknięcia myszą
 
 root.mainloop()
+
